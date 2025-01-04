@@ -1,0 +1,20 @@
+.table {
+    width: 100%;
+}
+
+
+.task-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  mat-card {
+    padding: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  mat-card.completed {
+    background-color: #e0e0e0;
+  }
+  

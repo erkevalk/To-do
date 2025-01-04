@@ -1,0 +1,64 @@
+<mat-dialog-content>
+
+    <form #taskForm="ngForm">
+        <div>
+            <mat-form-field>
+                <mat-label>Title</mat-label>
+                <input type="text" name="title" matInput [(ngModel)]="newTask.title" required>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <mat-label>Assigned Date</mat-label>
+                <input required name="assignedDate" matInput [matDatepicker]="assignedDatePicker" [(ngModel)]="newTask.assignedDate" [min]="today">
+                <mat-datepicker-toggle matSuffix [for]="assignedDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #assignedDatePicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field>
+                <mat-label>Due Date</mat-label>
+                <input required name="dueDate" matInput [matDatepicker]="dueDatePicker" [(ngModel)]="newTask.dueDate" [min]="newTask.assignedDate">
+                <mat-datepicker-toggle matSuffix [for]="dueDatePicker"></mat-datepicker-toggle>
+                <mat-datepicker #dueDatePicker></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div>
+            <mat-form-field required>
+                <mat-label>Status</mat-label>
+                <mat-select name="status" [(ngModel)]="newTask.status" required>
+                    <mat-option value="active">
+                        Active
+                    </mat-option>
+                    <mat-option value="close">
+                        Close
+                    </mat-option>
+                    <mat-option value="archived">
+                        Archived
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div>
+
+            <!--    <input #attachment type="file" required name="attachment" placeholder="Title" accept="image/png, image/jpg" [(ngModel)]="newTask.attachment" (change)="changeImage($event)">
+        
+            <canvas width="600" height="400" id="testCanvas"></canvas> -->
+            <!--  <mat-file-upload [acceptedTypes]="'.png, .jpg, .jpeg'">
+
+            </mat-file-upload> -->
+            <input type="file" id="file" (change)="changeImage($event)">
+            <img *ngFor="let item of base64textString" [src]="item" alt="" id="img">
+
+        </div>
+
+    </form>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-button color="primary" (click)="cancel()">Cancel</button>
+    <button mat-button (click)="save()" [disabled]="!taskForm.valid">Save</button>
+</mat-dialog-actions>
